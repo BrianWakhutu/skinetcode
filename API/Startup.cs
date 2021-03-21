@@ -34,11 +34,10 @@ namespace API
              services.AddSwaggerDocumentation();
              services.AddCors(opt => 
              {
-                 opt.AddPolicy("CorsPolicy", policy => 
-                 {
-
+               opt.AddPolicy("CorsPolicy", policy =>
+                {
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-                 });
+                });
              });
           }
 
@@ -56,11 +55,12 @@ namespace API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             } */
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
-
+          
             app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
             app.UseSwaggerDocumentation();
