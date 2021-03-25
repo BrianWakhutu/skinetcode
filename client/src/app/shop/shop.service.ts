@@ -1,3 +1,4 @@
+import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from './../shared/models/shopParams';
 import { IType } from './../shared/models/productType';
 import { IPagination } from '../shared/models/pagination';
@@ -38,6 +39,9 @@ export class ShopService {
 
       })
     );
+  }
+  getProduct(id: number){
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
   getBrands(){
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
