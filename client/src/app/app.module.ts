@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './core/inteceptor/loading.interceptors';
 import { ErrorInterceptor } from './core/inteceptor/error.interceptor';
 import { HomeModule } from './home/home.module';
 import { ShopModule } from './shop/shop.module';
@@ -8,6 +9,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -22,12 +24,16 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-
-    HomeModule
+    HomeModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,
       useClass:ErrorInterceptor,
+      multi: true
+    },
+    { provide: HTTP_INTERCEPTORS,
+      useClass:LoadingInterceptor,
       multi: true
     }
   ],
